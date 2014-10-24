@@ -1,0 +1,21 @@
+package com.papa.wx.web.repository;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.papa.wx.web.model.Poxy;
+
+public interface PoxyRepository extends JpaRepository<Poxy, Long> {
+	Poxy findById(long id);
+	List<Poxy> findByCustomerid(long customerid);
+	List<Poxy> findAll();
+	List<Poxy> findByGroupid(long groupid);
+	List<Poxy> findByGroupidAndSaleid(long groupid,long saleid);
+	Poxy findByCustomeridAndPoxyno(long customerid,String poxyno);
+	List<Poxy> findByGroupidAndSaleidAndCreatetimeGreaterThan(long groupid,long saleid,Date createtime);
+	
+	List<Poxy> findBySaleidAndCreatetimeGreaterThan(long saleid,Date createtime);
+
+}

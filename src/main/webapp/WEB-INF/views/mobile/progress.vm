@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("提现进度查询")
+<body>
+#importMobileShareDiv("金信网","金信网-安全、可靠、透明投融资平台，就在您身边！","http://www.jinxin99.cn")
+<script type="text/javascript">
+$(document).ready(function()
+{
+$(".spend_list").click(function(){
+	 var pid = $(this).attr("id");	 
+	 var uid = $(this).attr("uu");	 
+	 window.location.href = ("$rc.contextPath/mobile/progressdetail?pid="+pid+"&uid="+uid);
+});
+});
+</script>
+
+ <div class="speed_title">
+ 	<ul>
+ 		<li class="current">处理中</li>
+ 		<li>处理完成</li>
+ 	</ul>
+ </div>
+ <div class="spend_tab">
+ <div class="spend_mb">
+#foreach($p in $progressList)
+
+#set($statusStr = "处理中")
+#if(${p.status} == 0)
+#set($statusStr = "提现失败")
+#end
+#if(${p.status} == 1)
+#set($statusStr = "提现成功")
+#end
+
+#if($p.bankName == "中国工商银行")
+#set($bankIcon = "icbc.png")
+#end
+#if($p.bankName == "中国农业银行")
+#set($bankIcon = "nongye.png")
+#end
+#if($p.bankName == "中国建设银行")
+#set($bankIcon = "ccb.png")
+#end
+#if($p.bankName == "中国银行")
+#set($bankIcon = "boc.png")
+#end
+#if($p.bankName == "招商银行")
+#set($bankIcon = "zhaoshang.png")
+#end
+#if($p.bankName == "广发银行")
+#set($bankIcon = "guangfa.png")
+#end
+#if($p.bankName == "兴业银行")
+#set($bankIcon = "xingye.png")
+#end
+#if($p.bankName == "中国光大银行")
+#set($bankIcon = "guangda.png")
+#end
+	 <div class="spend_list" id="$!{p.id}" uu="${uid}">
+	 	<p><img src="images/$!{bankIcon}" alt="" /></p>
+	 	<dl>
+	 	
+	 	#set($strlength = $p.cardNo.toString().length())
+	 	#set($fourlength = $strlength - 4)
+	 		<dt><span>$number.currency("$!{p.money}")元</span>$!{p.bankName}  （尾号$p.cardNo.toString().substring($fourlength,$strlength)）</dt>
+	 		<dd><span style="color:#e19606;">$!{statusStr}</span>$!date.format('yyyy年MM月dd日 HH:mm:ss ',$!{p.withdrawTime})</dd>
+	 	</dl>
+	 </div>
+#end
+
+#if (! $progressList)
+ <div class="empty">
+ 	<dl>
+ 		<dt><img src="images/empty.jpg" alt="" /></dt>
+ 		<dd>没有找到处理中的提现记录</dd>
+ 		<dd><a href="http://www.jinxin99.cn/">http://www.jinxin99.cn/</a></dd>
+ 	</dl>
+ </div>
+#end
+
+ </div>
+ <div class="spend_mb"  style="display:none;">
+#foreach($p in $completList)
+#set($statusStr = "处理中")
+#if(${p.status} == 0)
+#set($statusColor = "#b32762")
+#set($statusStr = "提现失败")
+#end
+#if(${p.status} == 1)
+#set($statusColor = "#439b83")
+#set($statusStr = "提现成功")
+#end
+#if($p.bankName == "中国工商银行")
+#set($bankIcon = "icbc.png")
+#end
+#if($p.bankName == "中国农业银行")
+#set($bankIcon = "nongye.png")
+#end
+#if($p.bankName == "中国建设银行")
+#set($bankIcon = "ccb.png")
+#end
+#if($p.bankName == "中国银行")
+#set($bankIcon = "boc.png")
+#end
+#if($p.bankName == "招商银行")
+#set($bankIcon = "zhaoshang.png")
+#end
+#if($p.bankName == "广发银行")
+#set($bankIcon = "guangfa.png")
+#end
+#if($p.bankName == "兴业银行")
+#set($bankIcon = "xingye.png")
+#end
+#if($p.bankName == "中国光大银行")
+#set($bankIcon = "guangda.png")
+#end
+	 <div class="spend_list" id="$!{p.id}" uu="${uid}">
+	 	<p><img src="images/$!{bankIcon}" alt="" /></p>
+	 	<dl>
+	 	#set($strlength = $p.cardNo.toString().length())
+	 	#set($fourlength = $strlength - 4)
+	 		<dt><span>$number.currency("$!{p.money}")元</span>$!{p.bankName}  （尾号$p.cardNo.toString().substring($fourlength,$strlength)）</dt>
+	 		<dd><span style="color:${statusColor};">$!{statusStr}</span>$!date.format('yyyy年MM月dd日 HH:mm:ss ',$!{p.withdrawTime})</dd>
+	 	</dl>
+	 </div>
+#end
+#if (! $completList)
+ <div class="empty">
+ 	<dl>
+ 		<dt><img src="images/empty.jpg" alt="" /></dt>
+ 		<dd>没有找到处理完成的提现记录</dd>
+ 		<dd><a href="http://www.jinxin99.cn/">http://www.jinxin99.cn/</a></dd>
+ 	</dl>
+ </div>
+#end
+ </div>
+ </div>
+ <script type="text/javascript" src="js/tab2.js"></script>
+</body>
+</html>

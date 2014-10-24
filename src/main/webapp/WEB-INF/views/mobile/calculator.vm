@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("收益计算器")
+<body class="body_f">
+#importMobileShareDiv("金信网收益计算器","金信网-安全、可靠、透明投融资平台，就在您身边！","")
+<script>
+
+	var selecttype1 = '<option value="1">收益返还</option>';
+	var selecttype2 = '<option value="2">收益复投</option>';
+	var selecttype0 = '<option value="1">收益返还</option><option value="2">收益复投</option>';
+
+    $(document).ready(function() {
+    	calculate(0);
+        $("#selectproduct").change(function(e) {
+        	calculate(1);
+        });
+        $("#selecttype").change(function(e) {
+        	calculate(2);
+        });
+    });
+    
+    function calculate(from){
+    	var cycle_length = $("#cycle_length_"+$("#selectproduct").val()).html();
+    	var cycle_type = $("#cycle_type_"+$("#selectproduct").val()).html();
+    	var year_income = $("#year_income_"+$("#selectproduct").val()).html();
+    	var income_type = $("#income_type_"+$("#selectproduct").val()).html();
+    	var princial = $("#amount").val();
+
+        
+        
+        if(from != 2){
+            if(income_type == 0){
+            	$("#selecttype").html(selecttype0);
+            	$("#selecttype").removeAttr("disabled");
+            }else if(income_type == 1){
+            	$("#selecttype").html(selecttype1);
+            	$("#selecttype").attr("disabled","disabled");
+            }else if(income_type == 2){
+            	$("#selecttype").html(selecttype2);
+            	$("#selecttype").attr("disabled","disabled");
+            }        	
+        }
+        var income_type_seltext = $("#selecttype  option:selected").text();
+        
+        //转换 year_income
+        var findpercent = year_income.indexOf('%');
+        
+        if(findpercent>0){
+        	year_income = year_income.substr(0,findpercent);
+        	
+        	var year_income_array = year_income.split("~");
+        	var year_income_size = year_income_array.length;
+        	
+        	if(year_income_size==1){
+            	year_income = parseFloat(year_income) / 100;
+            	year_income = year_income.toFixed(4);
+            	$("#year_income").html(year_income*100 + "%");
+        	}else if(year_income_size==2){
+        		if(income_type_seltext == '收益返还'){
+                	year_income = parseFloat(year_income_array[0]) / 100;
+                	year_income = year_income.toFixed(2);
+                	$("#year_income").html(year_income*100 + "%");
+        		}else if(income_type_seltext == '收益复投'){
+                	year_income = parseFloat(year_income_array[0]) / 100;
+                	year_income = year_income.toFixed(4); 
+                	
+                	var year_inome_show = parseFloat(year_income_array[1]) / 100;
+                	year_inome_show = year_inome_show.toFixed(4); 
+                	
+                	$("#year_income").html(year_inome_show*100 + "%");
+        		}
+        	}
+        }
+        
+        //计算total
+        var total = calculateTotal(princial,cycle_length,cycle_type,year_income,income_type_seltext);
+        $("#total").html(total);
+        //计算totalinterest
+        var totalInterest = calculateTotalInterest(princial,cycle_length,cycle_type,year_income,income_type_seltext);
+        $("#totalInterest").html(totalInterest);
+        //计算每期累计本金
+         //计算每期产生利息
+        
+    	var cname = '月';
+		if(cycle_type == 'day'){
+			cname = '天';
+    	}else if(cycle_type == 'season'){
+    		cname = '季度';
+    	}else if(cycle_type == 'year'){
+    		cname = '年';
+    	}
+         
+        var liststring = '<tr><td colspan="3" style="text-align:left; padding-left:10px;">本期收益时间表</td></tr>';
+        var bannerstring = '<tr><td width="30%">月份</td><td>待收本金（元）</td><td>产生利息</td></tr>';
+        liststring += bannerstring;
+        
+        for (var cycle=1;cycle<=cycle_length;cycle++)
+		{
+        	var ac = calculateAccumulated(cycle, princial,cycle_length,cycle_type,year_income,income_type_seltext);
+        	var acI = calculateCycleInterest(cycle, princial,cycle_length,cycle_type,year_income,income_type_seltext);
+
+        	var sss ='<tr><td>'+cycle+'</td><td class="yellow">'+ac+'</td><td>'+acI+'</td></tr>';
+			
+        	liststring += sss;
+		
+		}
+        $("#listitem").html(liststring);
+    }
+    
+    function calculatorBlur(){
+
+        var myamount = $("#amount").val();
+
+        if (!validateRules.fullNumberName(myamount)) {
+        	$("#amount").val(0);
+        	alert("请输入正确的投资金额");
+        }
+        
+        //计算
+        calculate(0);
+    }
+    
+    function calculatorFocus(){
+
+        $("#amount").val("");
+
+        //计算
+        calculate(0);
+    }
+    
+    function calculateTotal(princial,cycle_length,cycle_type,year_income,income_type){
+    	
+    	var total = princial;
+    	var delta = 0;
+    	
+    	if('收益复投' == income_type){
+        	if(cycle_type == 'month'){
+        		delta = Math.pow(1+year_income/12,cycle_length);
+        	}else if(cycle_type == 'day'){
+        		delta = Math.pow(1+year_income/365,cycle_length);
+        	}else if(cycle_type == 'season'){
+        		delta = Math.pow(1+year_income/4,cycle_length);
+        	}else if(cycle_type == 'year'){
+        		delta = Math.pow(1+year_income/1,cycle_length);
+        	}
+        	
+        	total = princial*delta;    		
+    	}else if('收益返还' == income_type){
+        	if(cycle_type == 'month'){
+        		delta = cycle_length*year_income/12;
+        	}else if(cycle_type == 'day'){
+        		delta = cycle_length*year_income/365;
+        	}else if(cycle_type == 'season'){
+        		delta = cycle_length*year_income/4;
+        	}else if(cycle_type == 'year'){
+        		delta = cycle_length*year_income/1;
+        	}
+        	delta += 1;
+        	total = princial*delta;    		
+    	}
+    	
+    	var result = total.toFixed(2);
+    	return result;
+    }
+    
+    function calculateTotalInterest(princial,cycle_length,cycle_type,year_income,income_type){
+    	var total = calculateTotal(princial,cycle_length,cycle_type,year_income,income_type);
+    	var interest = total-princial;
+    	var result = interest.toFixed(2);
+    	
+    	return result;
+    }
+    
+    function calculateAccumulated(cycle, princial,cycle_length,cycle_type,year_income,income_type){
+    	
+    	var aPrincial = princial;
+    	if('收益复投' == income_type){
+        	var delta = 0;
+        	if(cycle_type == 'month'){
+        		delta = Math.pow(1+year_income/12,cycle);
+        	}else if(cycle_type == 'day'){
+        		delta = Math.pow(1+year_income/365,cycle);
+        	}else if(cycle_type == 'season'){
+        		delta = Math.pow(1+year_income/4,cycle);
+        	}else if(cycle_type == 'year'){
+        		delta = Math.pow(1+year_income/1,cycle);
+        	}
+        	
+        	aPrincial = princial*delta;
+        	aPrincial = aPrincial.toFixed(2);
+        	
+        	if(cycle == cycle_length){
+            	aPrincial = princial*1;
+            	aPrincial = aPrincial.toFixed(2);
+        	}
+    	}
+    	
+    	
+    	
+    	return aPrincial;
+    }
+    
+    function calculateCycleInterest(cycle, princial,cycle_length,cycle_type,year_income,income_type){
+    	
+    	var interest = "收益复投";
+    	if('收益返还' == income_type){
+    		
+        	if(cycle == cycle_length){
+        		interest = calculateTotalInterest(princial,cycle_length,cycle_type,year_income,income_type);
+        	}else{
+            	var delta = 0;
+            	if(cycle_type == 'month'){
+            		delta = year_income/12;
+            	}else if(cycle_type == 'day'){
+            		delta = year_income/365;
+            	}else if(cycle_type == 'season'){
+            		delta = year_income/4;
+            	}else if(cycle_type == 'year'){
+            		delta = year_income/1;
+            	}
+            	interest = princial*delta;
+            	interest = interest.toFixed(2);        		
+        	}
+
+    	}else if('收益复投' == income_type && cycle==cycle_length){
+    		interest = calculateTotalInterest(princial,cycle_length,cycle_type,year_income,income_type);
+    	}
+    	return interest;
+    }
+    
+</script>
+ <div class="lic_a">
+ 	<h4>请您输入投资金额并选择投资产品</h4>
+ 	 <dl>
+ 	<input type="text" name="amount" placeholder="投资金额" id="amount" value="10000" onfocus="calculatorFocus();" onblur="calculatorBlur();"/>
+ 	</dl>
+ </div>
+ 
+<div style="display:none;">
+#foreach($p in ${list})
+<div id="cycle_length_$velocityCount" style="display:none;">$!{p.cycle_length}</div>
+<div id="cycle_type_$velocityCount" style="display:none;">$!{p.cycle_type}</div>
+<div id="year_income_$velocityCount" style="display:none;">$!{p.year_income}</div>
+<div id="income_type_$velocityCount" style="display:none;">$!{p.income_type}</div>
+#end
+</div>
+ 
+ <div class="lic_b">
+ 	<ul>
+ 		<li><select name="selectproduct" id="selectproduct">
+#foreach($p in ${list})
+#set($type_chinese = "月")
+#if($p.cycle_type == "season")
+#set($type_chinese = "季度")
+#end
+#if($p.cycle_type == "year")
+#set($type_chinese = "年")
+#end
+#if($p.cycle_type == "day")
+#set($type_chinese = "日")
+#end 		
+ 			<option value="$velocityCount">$!{p.type_name}$!{p.cycle_length}个$!{type_chinese}</option>
+#end
+ 		</select>投资产品</li>
+ 		<li><select name="selecttype" id="selecttype"></select>收益获取方式</li>
+ 		<li><span id="year_income"></span>年化收益率</li>
+ 	</ul>
+ </div>
+ <div class="lic_c">
+ 	<dl>
+ 		<dt>本息合计(元)</dt>
+ 		<dd id="total"></dd>
+ 	</dl>
+ 	<dl>
+ 		<dt>利息收入(元)</dt>
+ 		<dd id="totalInterest"></dd>
+ 	</dl>
+ </div>
+ <div class="lic_d">
+ 	<table id="listitem" width="100%" border="0" cellspacing="0" cellpadding="0">
+ 	</table>
+ </div>
+</body>
+</html>

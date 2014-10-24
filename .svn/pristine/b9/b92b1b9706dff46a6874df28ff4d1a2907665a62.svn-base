@@ -1,0 +1,19 @@
+package com.papa.wx.web.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.papa.wx.web.model.Customer;
+import com.papa.wx.web.model.SalesConsultant;
+
+public interface SalesConsultantRepository extends JpaRepository<SalesConsultant, Long> {
+	SalesConsultant findById(long id);
+	SalesConsultant findByUid(long uid);
+	SalesConsultant findByName(String name);
+	List<SalesConsultant> findAll();
+	List<SalesConsultant> findByGroupId(long groupId);
+	
+	//List<Customer> findByCreattimeBetween(Date start, Date end);
+
+}

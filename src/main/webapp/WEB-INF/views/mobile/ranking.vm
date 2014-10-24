@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("投资排行榜")
+<body>
+#importMobileShareDiv("金信网投资排行榜","金信网投资总榜、月榜、周榜","")
+<div class="sy_title">
+	<ul>
+		<li class="current"><span></span>总  榜</li>
+		<li><span></span>月  榜</li>
+		<li><span></span>周 榜</li>
+	</ul>
+</div>
+<div class="sy_tab">
+<div class="sy_m">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr class="sy_tr">
+			<td>排名</td>
+			<td>用户名</td>
+			<td>投资金额（元）</td>
+			<td>排名变化</td>
+		</tr>
+#foreach($p in ${ranItem0})
+<tr>
+#if($velocityCount == 1)
+<td><img src="images/tz_02.jpg" alt="" /></td>
+#elseif ($velocityCount == 2)
+<td><img src="images/tz_05.jpg" alt="" /></td>
+#elseif ($velocityCount == 3)
+<td><img src="images/tz_06.jpg" alt="" /></td>
+#else
+<td>${velocityCount}</td>
+#end
+<td>$!{p.userName}</td>
+<td class="yellow">$number.currency("$!{p.bidMoney}")</td>
+#if(${p.changeType} == "1")
+<td><img src="images/tz_04.jpg" alt="" />$!{p.changeNum}</td>
+#elseif (${p.changeType} == "2")
+<td><img src="images/tz_03.jpg" alt="" />$!{p.changeNum}</td>
+#elseif (${p.changeType} == "3")
+<td><img src="images/new.jpg" alt="" />New</td>
+#else
+<td><img src="images/new.jpg" alt="" /></td>
+#end
+</tr>
+#end
+	</table>
+	<p>上次更新时间$!{ranItem0Time}</p>
+</div>
+<div class="sy_m" style="display:none;">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr class="sy_tr">
+			<td>排名</td>
+			<td>用户名</td>
+			<td>投资金额（元）</td>
+			<td>排名变化</td>
+		</tr>
+#foreach($p in ${ranItem1})
+<tr>
+#if($velocityCount == 1)
+<td><img src="images/tz_02.jpg" alt="" /></td>
+#elseif ($velocityCount == 2)
+<td><img src="images/tz_05.jpg" alt="" /></td>
+#elseif ($velocityCount == 3)
+<td><img src="images/tz_06.jpg" alt="" /></td>
+#else
+<td>${velocityCount}</td>
+#end
+<td>$!{p.userName}</td>
+<td class="yellow">$number.currency("$!{p.bidMoney}")</td>
+#if(${p.changeType} == "1")
+<td><img src="images/tz_04.jpg" alt="" />$!{p.changeNum}</td>
+#elseif (${p.changeType} == "2")
+<td><img src="images/tz_03.jpg" alt="" />$!{p.changeNum}</td>
+#elseif (${p.changeType} == "3")
+<td><img src="images/new.jpg" alt="" />New</td>
+#else
+<td><img src="images/new.jpg" alt="" /></td>
+#end
+</tr>
+#end
+	</table>
+	<p>上次更新时间$!{ranItem1Time}</p>
+</div>
+<div class="sy_m" style="display:none;">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr class="sy_tr">
+			<td>排名</td>
+			<td>用户名</td>
+			<td>投资金额（元）</td>
+			<td>排名变化</td>
+		</tr>
+#foreach($p in ${ranItem2})
+<tr>
+#if($velocityCount == 1)
+<td><img src="images/tz_02.jpg" alt="" /></td>
+#elseif ($velocityCount == 2)
+<td><img src="images/tz_05.jpg" alt="" /></td>
+#elseif ($velocityCount == 3)
+<td><img src="images/tz_06.jpg" alt="" /></td>
+#else
+<td>${velocityCount}</td>
+#end
+<td>$!{p.userName}</td>
+<td class="yellow">$number.currency("$!{p.bidMoney}")</td>
+#if(${p.changeType} == "1")
+<td><img src="images/tz_04.jpg" alt="" />$!{p.changeNum}</td>
+#elseif (${p.changeType} == "2")
+<td><img src="images/tz_03.jpg" alt="" />$!{p.changeNum}</td>
+#elseif (${p.changeType} == "3")
+<td><img src="images/new.jpg" alt="" />New</td>
+#else
+<td><img src="images/new.jpg" alt="" /></td>
+#end
+</tr>
+#end
+	</table>
+	<p>上次更新时间$!{ranItem2Time}</p>
+</div>
+</div>
+<script type="text/javascript" src="js/tab.js"></script>
+</body>
+</html>

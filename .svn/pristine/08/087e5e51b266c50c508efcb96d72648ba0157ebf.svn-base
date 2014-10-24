@@ -1,0 +1,753 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>客户服务</title>
+#set($jquery="$")
+
+<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+
+
+<script type="text/javascript">
+
+
+var saleArr;
+var saleArr1;
+
+
+${jquery}(function (){
+/*
+作者：简单小屋
+网站：www.aifou.net www.zixueku.net www.zixueku.com
+信箱：394097441@qq.com
+第一次完成于：2010-04-30 17:34（缺少关闭功能）
+第二次完成于：2010-04-30 22:46（增加了完成关闭功能）
+第三次完成于：2010-05-01 00:10（增加了最近聊天显示功能）
+第四次完成于：2010-05-01 00:42（修复了关闭一个后，发送聊天不显示，初始了聊天界面）
+
+*/						
+   window['dandan']={}
+   var ing_user;//当前用户
+   //浏览器
+   function liulanqi(){
+	  var h=${jquery}(window).height();
+	  var w=${jquery}(window).width();
+	  ${jquery}("#top").width(w);
+	  ${jquery}("#foot").html(h);
+	 
+	  ${jquery}(".box").height(h-135);
+	  ${jquery}("#mid_con").height(h-255);
+	  ${jquery}(".right_box").height(h-134);
+	  ${jquery}("#mid_say textarea").width(w-480);
+	  
+	  if(${jquery}(".box").height()<350){
+		${jquery}(".box").height(350)
+		 }
+	  if(${jquery}("#mid_con").height()<230){
+		 ${jquery}("#mid_con").height(230)
+		  }
+	  if(${jquery}(".right_box").height()<351){
+		 ${jquery}(".right_box").height(351)
+		  }
+	  if(${jquery}("#mid_say textarea").width()<320){
+		  ${jquery}("#mid_say textarea").width(320)
+		  }
+	 
+/*	 if(${jquery}("#mid_foot").width()<400){
+		 ${jquery}("#mid_foot").width(400)
+		 }  */
+		  
+	  	  
+		  
+	  if(w<=800){
+		  ${jquery}("#top").width(800);
+		  ${jquery}("#body").width(800)
+		   }else{
+		  ${jquery}("#body").css("width","100%")  
+		}	  
+	  //${jquery}("#top").html(b_h);
+	  
+	  ${jquery}(".my_show").height(${jquery}("#mid_con").height()-30);//显示的内容的高度出现滚动条
+	  //${jquery}(".my_show").scrollTop(${jquery}(".con_box").height()-${jquery}(".my_show").height());//让滚动滚到最底端.在这里不加这句了，没多用，可能还卡
+	  
+	  //右边的高度
+	  r_h=${jquery}(".right_box").height()-40*3;
+	  ${jquery}("#right_top").height(r_h*0.25)
+	  ${jquery}("#right_mid").height(r_h*0.45)
+	  ${jquery}("#right_foot").height(r_h*0.3)
+	  
+   }
+   window['dandan']['liulanqi']=liulanqi;
+   
+ //时间
+function mytime(){
+   var now=(new Date()).getHours();
+    if(now>0&&now<=6){
+	  return "午夜好";
+    }else if(now>6&&now<=11){
+	  return  "早上好";
+    }else if(now>11&&now<=14){
+	  return "中午好";
+    }else if(now>14&&now<=18){
+	  return "下午好";
+   }else{
+	  return "晚上好";
+   }
+}
+window['dandan']['mytime']=mytime;   
+   
+   
+   
+   
+//触发浏览器   
+${jquery}(window).scroll( function() { dandan.liulanqi();  } );//滚动触发
+${jquery}(window).resize(function(){ dandan.liulanqi(); return false; });//窗口触发
+//alert("??????")
+dandan.liulanqi();
+
+
+
+
+//ctrl+回车
+    ${jquery}("body").bind('keyup',function(event) {   
+         if(event.keyCode==13){   
+            saysay();
+        }
+		
+    }); 
+//发送按钮 
+    ${jquery}("#mid_sand").click(function (){
+           	saysay();						   
+    })
+	 
+	
+
+			 
+//替换所有的回车换行   
+function trim2(content)   
+{   
+    var string = content;   
+    try{   
+        string=string.replace(/\r\n/g,"<br />")   
+        string=string.replace(/\n/g,"<br />");         
+    }catch(e) {   
+        alert(e.message);   
+    }   
+    return string;   
+} 	
+//替换所有的空格
+function trim(content)   
+{   
+    var string = content;   
+    try{   
+        string=string.replace(/ /g,"&nbsp;")        
+    }catch(e) {   
+        alert(e.message);   
+    }   
+    return string;   
+} 	
+
+			 
+			 
+function myenter(){
+    //回车键的时候换行，留以后可以有用
+}			 
+			 
+			 
+
+	
+
+//显示个数
+function user_geshu(){
+     var length1=${jquery}(".ul_1 > li").length;
+     var length2=${jquery}(".ul_2 > li").length;
+     ${jquery}(".n_geshu_1").text(length1);
+     ${jquery}(".n_geshu_2").text(length2);	
+}
+user_geshu()
+//alert(length1)
+
+//点击展开会员
+${jquery}(".h3").click(function (){
+	 ${jquery}(this).toggleClass("click_h3").next(".ul").toggle(600);
+});
+
+//鼠标经过会员的时候
+function hover_user(${jquery}this){
+  ${jquery}(${jquery}this).hover(
+    function () {
+     ${jquery}(this).addClass("hover");
+    },
+    function () {
+      ${jquery}(this).removeClass("hover");
+    }
+  );
+}
+
+//经过输入文本框的时候
+${jquery}("#texterea").hover(
+  function () {
+    ${jquery}(this).addClass("textarea2");
+  },
+  function () {
+    ${jquery}(this).removeClass("textarea2");
+  }
+);
+//alert(${jquery}admin_name);
+${jquery}("#right_foot").html('<p><img src="images/head.jpg" alt="头象" /></p>'+${jquery}admin_name);
+
+
+//过滤所有的空格
+function kongge(content)   
+{   
+    return content.replace(/^\s\s*/, '').replace(/\s\s*$/, '');   
+} 
+window['dandan']['kongge']=kongge;
+
+
+/*******************************************************************************************/
+//创建新用户
+function newuser(${jquery}this,arr,i,ing){
+	var id="user_"+arr[2];
+	var name=arr[0];
+	var url=arr[3];
+	var img = arr[1];
+	//alert(ing)
+	if(ing!=undefined){//创建最近聊天
+	   //alert("最近聊天为真");
+	   ${jquery}(${jquery}this).prepend('<li id="'+id+'">'+arr[0]+'</li>');
+	   ${jquery}('#'+id).click(
+	   		function(){
+	   			showcustomer(id,name,url,img);
+	   		}
+	   		
+	   		  
+	   		);//给按钮加事件
+	}else{//创建好友
+	
+	  ${jquery}(${jquery}this).append('<li id="'+id+'">'+arr[0]+'</li>');
+	 //alert('aaa');
+	  ${jquery}('#'+id).click(function(){
+	  title_newuser('title_'+id,arr[0],arr[1]);
+	  ${jquery}('#saleId').val(arr[2]);
+	   ${jquery}('#saleName').val(arr[0]);
+	   });//给按钮加事件
+	//alert('b');
+	}
+	hover_user('#'+id);//给经过触发	
+	user_geshu();//更新人数
+}
+
+
+window['dandan']['newuser']=newuser;
+
+
+function showcustomer(id,name,url,img){
+	 //创建头像
+	  my_user_head(name,id,img,url);
+	  
+	  //创建XMLHttpRequest对象
+        var xmlHttp = new XMLHttpRequest();
+
+      
+        //配置XMLHttpRequest对象
+        xmlHttp.open("get", "ajax1?groupId=" + id);
+        ${jquery}('#groupId').val(id);
+//alert("set groupId:"+id);
+        //设置回调函数
+        xmlHttp.onreadystatechange = function () {
+         	
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                ${jquery}("#sale").empty();   
+               	var a = xmlHttp.responseText;
+            	saleArr = eval(a);
+   				var a1 = xmlHttp.responseText;
+            	saleArr1 = eval(a1);
+                for (var i = 0;i<saleArr.length;i++) {
+                    var userid=saleArr[i].uid;
+                    var bname=saleArr[i].name;
+                    ${jquery}("#sale").append("<li id='user_" + saleArr[i].uid+"'>" + saleArr[i].name+ "</li>");
+                   
+            
+                }
+               user_geshu(); 
+            }
+            
+           // alert("saleArr1:"+saleArr1);
+      		for (var i = 0;i<saleArr1.length;i++) {
+          		
+               (
+                 	function(id,name,mg,u){
+                 		${jquery}('#user_'+saleArr1[i].uid).click(function(){f(id,name,mg,u);});//给按钮加事件
+                 	}(saleArr1[i].uid,saleArr1[i].name,img,'')
+               );	
+        	}
+           
+             var f = function (m,n,a,b){
+			 	title_newuser(m,n,a); 
+				my_user_head(n,m,a,b); 
+				showpoxy(id,m); 
+				${jquery}('#saleId').val(m);
+				${jquery}('#saleName').val(n);
+					//alert('a:'+m);
+			 }	 
+                  
+        }
+
+        //发送请求
+        xmlHttp.send(null);
+}
+
+
+function showpoxy(gid,sid){
+
+
+
+ //创建XMLHttpRequest对象
+        var xmlHttp1 = new XMLHttpRequest();
+		
+      
+        //配置XMLHttpRequest对象
+        xmlHttp1.open("get", "poxy?groupid=" + gid+"&saleid="+sid);
+
+        //设置回调函数
+        xmlHttp1.onreadystatechange = function () {
+         	//alert("gid:"+gid);
+		
+            if (xmlHttp1.readyState == 4 && xmlHttp1.status == 200) {
+            	//alert("readyState:"+xmlHttp1.readyState);
+            	//alert("status:"+xmlHttp1.status);
+				var a = xmlHttp1.responseText;
+				//alert(a);
+            	var poxyarr = eval(a);
+            	var selhtml='<select name="poxyno" onchange="jqchk()">'
+   				var poxyhtml = ' ';
+   				var optionhtml=' ';
+   				 for (var i = 0;i<poxyarr.length;i++) {
+                    var poxyid=poxyarr[i].id;
+                    var poxyno =poxyarr[i].poxyno;
+                    
+                    //poxyhtml = poxyhtml+'<input type="checkbox" value="'+poxyno+'" name="poxyno" onclick="jqchk()"/>搜狐网友'+poxyno.substr(14,4);
+                    optionhtml = optionhtml+'<option id="'+poxyno+'" value="'+poxyno+'">搜狐网友'+poxyno.substr(14,4)+'</option>';
+                 }
+                 
+                 var endhtml = '</select>';
+                 poxyhtml = selhtml+optionhtml+endhtml;
+                 
+                 var initpoxy = ${jquery}('select[name=poxyno]').val();
+                 ${jquery}('#poxyId').val(initpoxy);
+                 
+                    var now=(new Date()).getHours();
+                    var times ;
+    				if(now>0&&now<=6){
+	  					times = "午夜好";
+    				}else if(now>6&&now<=11){
+	  					times =  "早上好";
+    				}else if(now>11&&now<=14){
+	  					times = "中午好";
+    				}else if(now>14&&now<=18){
+	  					times = "下午好";
+  			 		}else{
+	  					times = "晚上好";
+   					}
+                 
+                   ${jquery}("#top").html('<br />&nbsp;&nbsp;'+dandan.mytime()+','+times+',欢迎你的到来！！<br/>&nbsp;&nbsp;请选择马甲：'+poxyhtml);
+			}
+		
+		}
+   		//发送请求
+        xmlHttp1.send(null);
+}
+
+
+////更新最近聊天的位置
+function ing_my_user(${jquery}this,arr,i,ing){
+	var id="user";
+	${jquery}("#"+id+i).remove();
+	${jquery}(${jquery}this).prepend('<li id="'+id+i+'">'+arr[0]+'</li>');
+	${jquery}('#'+id+i).click(function(){title_newuser('title_'+id+ing,arr[0],arr[1]); });//给按钮加事件
+	hover_user('#'+id+i);//给经过触发	
+}
+
+//创建标题栏和主控制（原是有一个主控制，忘了，就合在一起了，哈哈）
+function title_newuser(id,user,img){
+	//alert('#'+id)
+	  if(${jquery}("#"+id).length<1){
+	  ${jquery}("#mid_top").append('<div id="'+id+'" class="list"><table border="0" cellspacing="0" cellpadding="0"><tr><td id="zi'+id+'" class="td_user td_user_click">'+user+'</td><td id="zino'+id+'" class="td_hide td_hide_click">X</td></tr></table></div>');
+
+	  //创建完成后给事件
+	  
+	  ${jquery}('#'+id).click(function(){
+	  title_newuser(id,user,img); 
+	  ${jquery}('#saleId').val(id);
+	  var gid1 = ${jquery}('#groupId').val();
+	  showpoxy(gid1,id);
+	  //${jquery}('#poxyId').val(id);
+	 // alert("saleId:"+id);
+	  });//给按钮加事件
+	  //关闭
+	  ${jquery}("#zino"+id).click(function(){delete_user(id,user,img); return false });//关闭打开的
+	  
+	  
+	  }else{
+	  ${jquery}("#zino"+id).addClass("td_hide_click");//给自己加样式
+	  ${jquery}("#zi"+id).addClass("td_user_click");//给自己加样式
+	  }
+	  my_siblings("#"+id);//去掉兄弟样式
+	  
+	  //创建内容框
+	  my_user_con(user,id);
+	  
+	  //创建头像
+	  my_user_head(user,id,img,'');
+	  
+	  ing_user=id;//当前用户
+	  //alert(ing_user);
+	  
+	  ${jquery}("#right_mid").html("");//清空右边的内容
+}
+
+//去掉兄弟的样式
+function my_siblings(${jquery}this){
+     ${jquery}(${jquery}this).siblings().children().children().children().children().removeClass("td_hide_click td_user_click");
+}
+
+//创建右边的头像
+function my_user_head(user,id,img,url){
+	if(${jquery}(".head"+id).length<1){
+		if(!img){//头像为空的时候
+			img="user_img/0.jpg";
+		}
+       ${jquery}("#right_top").append('<div class="head'+id+'"><p><img src="'+img+'" alt="'+user+'" /></p>'+user+'<p><a href="'+url+'">点击进入</a></p><div>');
+	   ${jquery}(".head"+id).hide();//默认是隐藏，让它有一点效果
+	}
+	sibli_hide(".head"+id);
+}
+//隐藏兄弟头像
+function sibli_hide(${jquery}this){
+     ${jquery}(${jquery}this).show(500,function(){${jquery}(".my_show").scrollTop(${jquery}(".con_box").height()-${jquery}(".my_show").height());/*让滚动滚到最底端*/}).siblings().hide(500);//隐藏其他兄弟
+}
+//创建内容框
+function my_user_con(user,id){
+	if(${jquery}("#user_con"+id).length<1){
+	   ${jquery}(".con_box").append('<div id="user_con'+id+'"><font color="#CCCCCC">请在下面文本框里输入你想要聊天的内容，与用户【'+user+'】聊天</font></div>');
+	   ${jquery}("#user_con"+id).hide();//默认隐藏，增加效果
+	}
+	sibli_hide("#user_con"+id);//隐藏兄弟
+}
+
+//关闭打开的窗口
+function delete_user(id,user,img){
+	if(ing_user==id){
+		if(confirm('你确定要关闭 '+user+' 聊天窗口吗？\n 注意哦，关闭后你跟 '+user+' 的聊天记录就不见了哦')){
+	    //alert(id);
+		//alert(${jquery}("#user_con"+id).text());//内容
+		//alert(${jquery}(".head"+id).html());//头像
+		${jquery}("#"+id).remove();//栏目栏目
+		${jquery}("#user_con"+id).remove();//删除内容
+		${jquery}(".head"+id).remove();//删除头像
+		 //alert(${jquery}(".list").length);//还有几个栏目
+		 if(${jquery}(".list").length>0){
+			 var eq=${jquery}(".list").length-1;
+			 //alert(${jquery}(".list:eq("+eq+")").attr("id"));
+			 var old_id=${jquery}(".list:eq("+eq+")").attr("id");
+			 sibli_hide(".head"+old_id);//显示最后一个的头像
+			 sibli_hide("#user_con"+old_id);//显示最后一个的内容
+			 ${jquery}("#zino"+old_id).addClass("td_hide_click");//给最后一个加样式
+	         ${jquery}("#zi"+old_id).addClass("td_user_click");//给最后一个加样式
+			 ing_user=old_id;//给聊天框定位
+			 //alert(ing_user);
+			 
+		 }else{
+		     //alert("已经全部删除");
+			 ${jquery}(".dandan_liaotian").show(500)
+		 };
+		
+	    }
+	}else{
+		title_newuser(id,user,img);
+	}
+}
+
+
+//发送后调用此方法
+ function saysay(){
+	 
+	 
+	 if(${jquery}(".list").length<1){
+		   alert("你还没选中跟哪个聊天，请点左边好友选中一个再聊");
+		   return false;
+		 }
+	 
+	 
+	  	//创建XMLHttpRequest对象
+        var xmlHttp = new XMLHttpRequest();
+        var saleId = document.getElementById('saleId').value;
+        var groupId = document.getElementById('groupId').value;
+        var poxyId = document.getElementById('poxyId').value;
+        //alert(saleId);
+        //alert("get groupId:"+groupId);
+        // alert("get poxyId:"+poxyId);
+	    //配置XMLHttpRequest对象
+        xmlHttp.open("get", "send?poxyId="+poxyId+"&customerId="+$customer.id+"&salesConsultantId="+saleId+"&groupId="+groupId+"&details="+trim2(trim(${jquery}("#texterea").val())) );
+
+        //设置回调函数
+        xmlHttp.onreadystatechange = function () {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+       
+                      
+            }
+        }
+
+        //发送请求
+        xmlHttp.send(null);
+        
+	  var t=new Date().toLocaleTimeString();//当前时间
+	  if(${jquery}("#texterea").val()){
+	  ${jquery}("#user_con"+ing_user).append(
+	  	'<div class="my_say_con"><font color=\"#0000FF\">'+${jquery}admin_name+t+"</font><p><font color=\"#333333\">"+trim2(trim(${jquery}("#texterea").val()))+'</font></p></div>'
+	  	);
+	  	
+	  	
+	  	
+	  	
+	  	
+	  ${jquery}("#right_mid").html(${jquery}("#texterea").val());//右边显示刚发送的文字
+	  ${jquery}("#texterea").val("");
+	  ${jquery}(".my_show").scrollTop(${jquery}(".con_box").height()-${jquery}(".my_show").height());//让滚动滚到最底端
+	  //alert(${jquery}(".con_box").height());
+	  //alert(${jquery}("#user_con"+ing_user+" > .my_say_con").length);//聊天记录的个数
+	  //alert(ing_user)
+	   var ing_id=ing_user.substring(10,ing_user.length);
+	   //alert(ing_id);
+	   if(${jquery}("#usering"+ing_id).length<1){//创建最近聊天人
+	       dandan.newuser('.ul_1',${jquery}arr_user[ing_id],'ing'+ing_id,ing_id);//创建最近聊天
+	   }else{
+		   ing_my_user('.ul_1',${jquery}arr_user[ing_id],'ing'+ing_id,ing_id);//更新最近聊天的位置   
+	   }
+      }else{
+		alert("你输入的内容为空")  
+	  }
+	  ${jquery}("#texterea").focus();//光标焦点
+	}  
+
+
+
+
+//欢迎
+${jquery}("#top").html('<br />&nbsp;&nbsp;'+dandan.mytime()+','+${jquery}admin_name+',欢迎你的到来！！<br/>');
+
+//加载用户
+${jquery}(".ul").html("");//初始清空原来留在那里让w3c通过的
+for(i=0;i<${jquery}arr_user.length;i++){
+    dandan.newuser('.ul_2',${jquery}arr_user[i],i);//创建用户
+	
+}
+
+for(i=0;i<${jquery}arr_user1.length;i++){
+    dandan.newuser('.ul_1',${jquery}arr_user1[i],i,i);//创建所有楼盘
+	
+}
+
+
+
+})
+
+</script>
+
+<script type="text/javascript">
+
+
+
+
+//登陆的人
+${jquery}admin_name=prompt("请输入你的名字","$customer.username");
+if(${jquery}admin_name!=null){
+  if(!${jquery}admin_name.replace(/^\s\s*/, '').replace(/\s\s*$/, '')){
+    ${jquery}admin_name="游客";
+  }
+}else{
+    ${jquery}admin_name="游客";
+}
+
+//成员数组
+${jquery}arr_user=new Array(
+#foreach($sale in $sales) 
+Array('$sale.name','images/001.jpg','$sale.uid'),
+#end
+Array('$sale.name','','$sale.uid')
+)
+
+//楼盘
+${jquery}arr_user1=new Array(
+ #foreach($group in $groups) 
+Array('$group.buildName','images/001.jpg','$group.groupId','$group.url'),
+#end
+Array('$customer.username','','$customer.id','http://www.baidu.com')
+)
+
+${jquery}(function(){  
+     
+       run();             //加载页面时启动定时器  
+       var interval;  
+       function run() {  
+              interval = setInterval(chat, "2000");  
+       }  
+       function chat() {  
+             	
+        var xmlHttp = new XMLHttpRequest();
+     	var sid = ${jquery}('#saleId').val();
+     	var pid = ${jquery}('#poxyId').val();
+     	var snm = ${jquery}('#saleName').val();
+     	//alert('sid:'+sid);
+     	//alert('get poxyId:'+pid);
+     	if(sid==''){
+     		sid='1';
+     	}
+     	
+     	if(pid==''){
+     		pid='1';
+     	}
+     	//alert('sid:'+sid);
+     	//alert('pid:'+pid);
+	    //配置XMLHttpRequest对象
+        xmlHttp.open("get", "ref?poxyId="+pid+"&salesConsultantId="+sid);
+
+        //设置回调函数
+        xmlHttp.onreadystatechange = function () {
+	        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+	            
+	             var a = xmlHttp.responseText;
+	            // alert(a);
+	             if(a!=''&&a!=undefined){
+		             	var result = eval(a);
+		               	var conts= ' ' ;   
+		               	for (var i = 0;i<result.length;i++) {
+		               		var sendtype = result[i].sendtype;
+		               		var showname;
+			               	if(sendtype=="1"){
+			               		showname='搜狐网友'+pid.substr(14,4);
+			               		
+			               	}if(sendtype=="2"){
+			               	
+			               		showname=snm;
+			               	}
+			               		var datest = result[i].createtime;
+			               		datest = datest.substr(0, 16);
+			            		conts = conts+'<div class="my_say_con"><font color=\"#0000FF\">'+showname+'   '+datest+"</font><p><font color=\"#333333\">"+result[i].details+'</font></p></div>'
+			            }
+		            	
+		            	var currenthtml = ${jquery}("#user_con"+sid).html();
+		            	
+		            	if(currenthtml!=conts){
+		            		${jquery}("#user_con"+sid).html(
+		  					conts
+		  					);
+		            	}
+	             }else{
+	             
+	             	${jquery}("#user_con"+sid).html(
+		  					''
+		  			);
+	             }
+	            	
+	            	
+	           }
+        }
+
+        //发送请求
+        xmlHttp.send(null);
+      }  
+  
+      
+    // $("#closeChat").click(
+     	//function(){  
+        // clearTimeout(interval);  //关闭定时器  
+     	//}
+    // )  
+            
+   }); 
+
+
+
+function jqchk(){  //jquery获取复选框值    
+  var sel_val = ${jquery}('select[name=poxyno]').val();    
+ // alert('sel_val:'+sel_val);
+   ${jquery}('#poxyId').val(sel_val);   
+   // alert('已选马甲:'+sel_val);
+}   
+
+
+
+</script>
+<link href="css/dandan.css" rel="stylesheet" media="screen" type="text/css" />
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<div id="mid_top">
+<!--  <div class="list">
+    <table border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td class="td_user td_user_click">老猪</td>
+        <td class="td_hide td_hide_click">X</td>
+      </tr>
+    </table>
+  </div>-->
+</div>
+<div id="top">头部</div>
+<div id="body"> 
+<input type="hidden"  id="saleId" value="" />
+<input type="hidden"  id="poxyId" value="" />
+<input type="hidden"  id="groupId" value="" />
+<input type="hidden"  id="saleName" value="" />
+  <div id="left">
+    <div class="box">
+      <h3 class="h3 h3_1">所有楼盘(<span class="n_geshu_1"></span>)</h3>
+      <ul class="ul ul_1">
+        <li>老猪</li>
+       
+		
+      </ul>
+      <h3 class="h3 h3_2" style="margin-left:20px;">所有销售(<span class="n_geshu_2"></span>)</h3>
+      <ul class="ul ul_2" id="sale">
+        <li>蛋蛋</li>
+      </ul>
+     
+    </div>
+    <div class="box_f"></div>
+  </div>
+  <div id="right">
+    <div class="right_box">
+      <div id="right_top">
+        <!--<p><img src="images/head.jpg" alt="头象" /></p>
+        老猪--></div>
+      <div id="right_mid"></div>
+      <div id="right_foot">蛋蛋</div>
+      <div class="blank"></div>
+    </div>
+    <div class="right_box_foot"></div>
+  </div>
+  <div id="mid">
+    <div id="mid_con">
+      <div class="my_show">
+        <div class="con_box"><div class="dandan_liaotian"><img src="images/dadan.jpg" alt="蛋蛋聊天界面" /></div></div>
+      </div>
+    </div>
+    <div id="mid_mid"></div>
+    <div id="mid_foot">
+      <div id="mid_say">
+        <textarea name="" cols="" rows="" id="texterea"></textarea>
+      </div>
+      <div id="mid_sand">发送</div>
+      <div class="blank"></div>
+    </div>
+    <div class="mid_box" onclick="sendMess();"></div>
+  </div>
+
+</div>
+</body>
+</html>
+
+

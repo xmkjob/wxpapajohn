@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+
+	<import resource="applicationContext-service.xml"/>
+    
+    <!-- data source -->
+    <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close"
+        p:driverClass="com.mysql.jdbc.Driver" p:jdbcUrl="jdbc:mysql://localhost/papajohn?useUnicode=yes&amp;characterEncoding=UTF-8"
+        p:username="papa" p:password="Aq1sW2de#"
+        p:partitionCount="2" p:acquireIncrement="5"
+        p:minConnectionsPerPartition="10" p:maxConnectionsPerPartition="20"
+        p:idleConnectionTestPeriodInMinutes="1" p:idleMaxAgeInMinutes="5"
+        p:statementsCacheSize="100" />
+
+	<!-- shiro configuration -->
+	<bean id="accountRealm" class="com.papa.wx.web.security.AccountRealm"/>
+
+	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager" />
+	
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager" p:realm-ref="accountRealm" 
+    		p:sessionManager-ref="sessionManager" />
+	
+	<bean factory-bean="sessionManager" factory-method="getSessionIdCookie" p:name="sid"/>
+	
+    <bean id="rememberMeManager" factory-bean="securityManager" factory-method="getRememberMeManager"/>
+    <bean factory-bean="rememberMeManager" factory-method="getCookie" p:maxAge="1296000"/> <!-- 60 * 60 * 24 * 15 -->
+    
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="successUrl" value="/welcome"/>
+        <property name="unauthorizedUrl" value="/login"/>
+        <property name="filterChainDefinitions">
+            <value>
+           
+            /js/** = anon
+            /css/** = anon
+            /css/images/** = anon
+            /images/** = anon
+            
+            /mobile/** = anon
+            /mobile/js/** = anon
+            /mobile/css/** = anon
+            /mobile/images/** = anon
+            /sendMsg = anon
+
+            /index.jps = anon
+            / = anon
+            /login = authc
+            /** = user
+            </value>
+        </property>
+    </bean>
+
+    <bean id="authc" class="com.papa.wx.web.security.LoginAuthenticationFilter"/>
+
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+	
+</beans>                

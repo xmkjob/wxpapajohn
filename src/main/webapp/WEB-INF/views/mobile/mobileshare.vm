@@ -1,0 +1,7 @@
+#macro(importMobileShareDiv $title $content $link)
+
+<div style="display:none;" id="sharetitle">$title</div>
+<div style="display:none;" id="sharecontent">$content</div>
+<div style="display:none;" id="sharelink">$link</div>
+<script src="$rc.contextPath/mobile/js/weixinshare.js" type="text/javascript"></script>
+#end

@@ -1,0 +1,20 @@
+package com.papa.wx.web.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.papa.wx.web.model.Customer;
+import com.papa.wx.web.model.Message;
+
+public interface MessageRepository extends JpaRepository<Message, Long> {
+	Message findById(long id);
+	List<Message> findByCustomerId(long customerId);
+	List<Message> findAll();
+	List<Message> findByPoxyId(String poxyId);
+	List<Message> findByPoxyIdAndSalesConsultantIdOrderByCreatetimeDesc(String poxyId,long salesConsultantId);
+	List<Message> findByPoxyIdAndSalesConsultantId(String poxyId,long salesConsultantId);
+	List<Message> findByCustomerIdAndStatus(long customerId,int status);
+	
+	List<Message> findByCreatetimeLike(String createtime);
+}

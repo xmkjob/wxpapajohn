@@ -1,0 +1,21 @@
+input.encoding = UTF-8
+output.encoding = UTF-8
+velocimacro.library = mobile/mobileheader.vm,mobile/mobileshare.vm
+#----------------------------------------------------------------------------
+#  default LogSystem to use: default: AvalonLogSystem
+#----------------------------------------------------------------------------
+
+runtime.log.logsystem.class = org.apache.velocity.runtime.log.SimpleLog4JLogSystem
+
+runtime.log.logsystem.log4j.category = velocity_log
+
+#----------------------------------------------------------------------------
+# This controls if Runtime.error(), info() and warn() messages include the
+# whole stack trace. The last property controls whether invalid references
+# are logged.
+#----------------------------------------------------------------------------
+
+runtime.log.error.stacktrace = false
+runtime.log.warn.stacktrace = false
+runtime.log.info.stacktrace = false
+runtime.log.invalid.reference = true

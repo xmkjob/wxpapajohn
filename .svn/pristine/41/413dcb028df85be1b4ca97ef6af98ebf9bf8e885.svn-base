@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>WAP首页</title>
+<meta http-equiv="Cache-Control" content="no-transform " />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+<div class="center">
+    <div class="header">
+    	<a href="#" class="h_left">返回</a>
+    	<a href="#" class="h_right"><img src="images/h_right.jpg" alt="" /></a>
+    </div>
+        <div class="huo_img">
+            <img src="images/d_04.jpg" alt="" />
+        </div>
+        <div class="huo_wz">
+            <div class="huo_wzl">
+                <dl>
+                    <dt><img src="images/b_04.jpg" alt="" /></dt>
+                    <dd><b>2014</b>年<b>10</b>月<b>20</b>日至<b>2014</b>年<b>10</b>月<b>31</b>日</dd>
+                    <dt><img src="images/b_05.jpg" alt="" /></dt>
+                    <dd>1.这是文字内容</dd>
+                    <dd>2.这是文字内容</dd>
+                    <dd>3.这是文字内容</dd>
+                    <dd>4.这是文字内容</dd>
+                    <dt><img src="images/b_06.jpg" alt="" /></dt>
+                    <dd>这是文字内容</dd>
+                    <dt><img src="images/b_07.jpg" alt="" /></dt>
+                    <dd>这是文字内容</dd>
+                    <dd>这是文字内容</dd>
+                    <dd>这是文字内容</dd>
+                    <dd>这是文字内容</dd>
+                    <dd>这是文字内容</dd>
+                </dl>
+            </div>
+            <img src="images/b_02.jpg" alt="" style="width:100%; float: left;" />
+        </div>
+    <div class="huo_img">
+        <a href="#" class="gui">&nbsp;</a>
+        <img src="images/b_03.jpg" alt="" />
+    </div>
+</div>
+</body>
+</html>

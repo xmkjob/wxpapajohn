@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+       					   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+       					   http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+    <context:component-scan base-package="com.papa.wx.web.controller">
+         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">      
+        <property name="messageConverters">      
+            <list >
+            	<ref bean="stringHttpMessageConverter" />     
+            	<ref bean="marshallingHttpMessageConverter" />     
+                <ref bean="mappingJacksonHttpMessageConverter" /> 
+            </list>      
+        </property>      
+    </bean> 
+    
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+        <property name="defaultHandler">
+            <bean class="org.springframework.web.servlet.mvc.UrlFilenameViewController"/>
+        </property>
+        <property name="useDefaultSuffixPattern" value="false"/>
+    </bean>
+    
+    
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+    <property name="supportedMediaTypes">    
+        <list>    
+            <value>text/plain;charset=UTF-8</value>    
+       </list>
+    </property>
+    <property name="writeAcceptCharset" value="false"/>
+    </bean>
+    
+    <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">    
+    <property name="supportedMediaTypes">    
+        <list>    
+            <value>application/json;charset=UTF-8</value>    
+       </list>    
+    </property>
+    </bean> 
+    
+    <bean id="marshallingHttpMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">    
+    <property name="supportedMediaTypes">    
+        <list>    
+            <value>application/xml;charset=UTF-8</value>    
+			<value>text/xml;charset=UTF-8</value>
+       </list>    
+    </property>
+    <property name="marshaller" ref="castorMarshaller" />
+    <property name="unmarshaller" ref="castorMarshaller" />
+    </bean> 
+    
+    <bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
+    </bean>
+    
+     <!-- SpringMVC上传文件时，需要配置MultipartResolver处理器 -->  
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
+        <!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->  
+        <property name="maxUploadSize" value="2000000"/>  
+    </bean>  
+
+
+    <bean id="velocityConfig" class="org.springframework.web.servlet.view.velocity.VelocityConfigurer"
+            p:resourceLoaderPath="/WEB-INF/views" p:configLocation="/WEB-INF/velocity.properties" />
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.velocity.VelocityViewResolver"
+            p:prefix="" p:suffix=".vm" p:cache="true" p:contentType="text/html; charset=UTF-8"
+            p:requestContextAttribute="rc" p:exposeRequestAttributes="true"
+            p:exposeSessionAttributes="true"
+            p:toolboxConfigLocation="/WEB-INF/velocity-tools.xml"
+            p:viewClass="com.papa.wx.web.util.VelocityTools20View"
+            />
+
+	<mvc:resources mapping="/js/**" location="/js/"/>
+	<mvc:resources mapping="/css/**" location="/css/"/>
+    <mvc:resources mapping="/css/images/**" location="/css/images/"/>
+    <mvc:resources mapping="/images/**" location="/images/"/>
+	<mvc:resources mapping="/mobile/js/**" location="/mobile/js/"/>
+	<mvc:resources mapping="/mobile/css/**" location="/mobile/css/"/>
+    <mvc:resources mapping="/mobile/images/**" location="/mobile/images/"/>   
+    
+</beans>

@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Document</title>
+ </head>
+ <body>
+	
+	<form id="fm1" name="fm" action="../sendMsg" method="post">
+		
+		<input type="hidden" name="to" value="100000000000041372"/>
+		<input type="hidden" name="from" value="48293574"/>
+		<input type="hidden" name="message" value="33333333333"/>
+		<input type="hidden" name="imageUrl" value="33333333333"/>
+		<input type="hidden" name="thumbnail" value="444444444"/>
+		<input type="hidden" name="createTime" value="1413776734771"/>
+		<input type="hidden" name="type" value="1"/>
+		<input type="submit"  value="ok"/>
+	</form>
+
+
+ </body>
+</html>
+<script>
+
+	function sub(){
+	
+		var fm1 = document.getElementById('fm1');
+		fm1.submit();
+	
+	}
+</script>

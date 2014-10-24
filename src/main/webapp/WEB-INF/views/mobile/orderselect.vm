@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("选择产品")
+<body>
+#importMobileShareDiv("金信网","金信网-安全、可靠、透明投融资平台，就在您身边！","http://www.jinxin99.cn")
+<script type="text/javascript">
+$(document).ready(function()
+{
+$("dl").click(function(){
+	 var pid = $(this).attr("title");
+	 var pname = $(this).children("dt").text();		 
+	 var tmpDD = $(this).children("dd");
+	 var pcycle = tmpDD[0].innerText;
+	 var pincome = tmpDD[1].innerText;
+	 var combined = encodeURIComponent(pname+"_"+pcycle+"_"+pincome);
+	 var name = (getUrlParam("name"));
+	 var phone = (getUrlParam("phone"));
+	 var amount = (getUrlParam("amount"));
+	 
+	 window.location.href = ("$rc.contextPath/mobile/order?name="+name+"&phone="+phone+"&amount="+amount+"&pid="+pid+"&combined="+combined);
+});
+});
+
+function getUrlParam(name){  
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");  
+    //匹配目标参数  
+    var r = window.location.search.substr(1).match(reg);  
+    //返回参数值  
+    if (r!=null) return (r[2]);  
+    return null;  
+}  
+</script>
+ <div class="p_title">金信网为您精选投资项目，点击选择您要预约的产品</div>
+ <div class="pro_list">
+ 
+#foreach($p in ${list})
+
+#set($type_chinese = "月")
+#if($p.cycle_type == "season")
+#set($type_chinese = "季度")
+#end
+#if($p.cycle_type == "year")
+#set($type_chinese = "年")
+#end
+#if($p.cycle_type == "day")
+#set($type_chinese = "日")
+#end
+ 	<dl title="$!{p.id}">
+ 		<dt>$!{p.type_name}</dt>
+ 		<dd>投资周期$!{p.cycle_length}个$!{type_chinese}</dd>
+ 		<dd>预期年化收益率$!{p.year_income}</dd>
+ 	</dl>
+#end
+ </div>
+</body>
+</html>

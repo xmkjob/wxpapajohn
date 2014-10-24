@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>WAP首页</title>
+<meta http-equiv="Cache-Control" content="no-transform " />
+<link rel="stylesheet" href="css/style.css" type="text/css" />
+</head>
+<body>
+<div class="center">
+    <form action="">
+    <div class="header">
+    	<a href="#" class="h_left">返回</a>
+    	<a href="#" class="h_right"><img src="images/h_right.jpg" alt="" /></a>
+    </div>
+    <div class="section_a">
+        <img src="images/12_02.jpg" alt="" />
+        <img src="images/12_03.jpg" alt="" />
+    </div>
+    <div class="section_a">
+        <ul class="xinx_input">
+            <li><span>姓名*</span><p><input type="text" name="" id="" /></p></li>
+            <li><span>电话*</span><p><input type="text" name="" id="" /></p></li>
+            <li><span>地址*</span><p><textarea name="" id="" cols="30" rows="10"></textarea></p></li>
+        </ul>
+        <img src="images/12_04.jpg" alt="" />
+        <img src="images/12_05.jpg" alt="" />
+    </div>
+    <div class="section_a">
+        <input type="submit" value="&nbsp;" class="xin_sub" />
+        <img src="images/12_06.jpg" alt="" />
+    </div>
+    </form>
+</div>
+</body>
+</html>

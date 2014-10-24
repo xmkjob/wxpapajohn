@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("登录绑定")
+<body class="body_f">
+#importMobileShareDiv("金信网","金信网-安全、可靠、透明投融资平台，就在您身边！","http://www.jinxin99.cn")
+<script>
+    $(document).ready(function() {
+    	$("#prompt").hide();
+    });
+</script>
+ <div class="acc_top">
+ 	<dl>
+ 		<dt><img src="images/jin_01.jpg" alt="" /></dt>
+ 		<dd><img src="images/jin_02.jpg" alt="" /></dd>
+ 	</dl>
+ </div>
+ <div class="acc_input">
+ 	<div class="inut_tc">
+ 		<p></p>
+ 		<span id="prompt"></span>
+ 	</div>
+ 	<form id="bindingform" method="post" onsubmit="return false;">
+ 	<p>请输入您在金信网注册的其他账号和密码</p>
+ 	<ul>
+ 		<li><input type="text" name="username" placeholder="账号" id="username" /></li>
+ 		<li><input type="password" name="password" placeholder="密码" id="password" /></li>
+ 	</ul>
+ 	<p>
+ 	<input type="hidden" id="wid" name="wid" value="$!{wid}" />
+ 	<input type="button" id="bind" name="bind" onclick="binding();" value="登录绑定" />
+ 	</p>
+ 	</form>
+ </div>
+<div class="acc_ar">
+	#if($binded == "1")
+	<dl style="display:block;float:right;">
+	<dt><a href="javascript:unbinding();">解除所有账号绑定</a></dt>
+	</dl>
+	#end
+</div>
+<div class="acc_ar">
+	<dl>
+		<dd>未注册的用户，请先到金信网进行注册<a href="http://www.jinxin99.cn">http://www.jinxin99.cn</a></dd>
+		<dd>忘记密码的用户，请通过金信网找回密码或咨询客服<a href="tel:4008907777">400-890-7777</a></dd>
+	</dl>
+</div>
+
+</body>
+</html>

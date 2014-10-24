@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("产品预约")
+<body>
+#importMobileShareDiv("金信网产品预约","金信网-安全、可靠、透明投融资平台，就在您身边！","")
+<script type="text/javascript">
+$(document).ready(function()
+{
+$('#selectproduct').click(function(){
+	var name = $("#name").attr("value");
+	var phone = $("#phone").attr("value");
+	var amount = $("#amount").attr("value");
+	window.location.href = "$rc.contextPath/mobile/orderselect?name="+ encodeURIComponent(name)
+			+"&phone="+encodeURIComponent(phone)
+			+"&amount="+encodeURIComponent(amount);
+});
+});
+</script>
+ <div class="p_title">请选择您要预约的产品</div>
+ <form id="orderform" method="post" onsubmit="return false;">
+ <div class="p_list">
+ 	<ul>
+ 		<li >
+ 		<span id="producthint" style="display:block;"></span>
+ 		<select id="selectproduct">
+ 			<option value="">$!{combined}</option>
+ 		</select></li>
+ 	</ul>
+ </div>
+ <div class="p_title">请填写您的个人信息</div>
+ <div class="p_list">
+ 	<ul>
+ 		<li><span id="namehint" style="display:block;"></span>
+ 		<input type="text" name="name" placeholder="请填写姓名" id="name" value="$!{name}" onblur="mynameBlur();"/>
+ 		</li>
+ 		<li><span id="phonehint" style="display:block;"></span>
+ 		<input type="text" name="phone" placeholder="请填写电话号码" id="phone" value="$!{phone}" onblur="myphoneBlur();"/>
+ 		</li>
+ 		<li><span id="amounthint" style="display:block;"></span>
+ 		<input type="text" name="amount" placeholder="请填写预约投资金额" id="amount" value="$!{amount}" onblur="myamountBlur();" />
+ 		</li>
+ 	</ul>
+ 	<p><input type="hidden" name="pid" id="pid" value="$!{pid}" /></p>
+ 	<p>
+ 	<input type="button" id="ordersubmit" name="ordersubmit" onclick="ordernow();" value="提交预约申请" />
+ 	</p>
+ 	<p>提交申请后，客服人员会尽快致电联系您。</p>
+ </div>
+ </form>
+</body>
+</html>

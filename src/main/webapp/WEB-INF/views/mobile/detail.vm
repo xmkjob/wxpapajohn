@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv($!{p.name})
+<body class="body_f">
+#importMobileShareDiv("金信网-$!{p.name}","金信网-安全、可靠、透明投融资平台，就在您身边！","")
+<script type="text/javascript">
+var intDiff = parseInt($date.getSystemTime() / 1000 - $p.startline);//倒计时总秒数量
+function timer(intDiff){
+    window.setInterval(function(){
+    var day=0,
+        hour=0,
+        minute=0,
+        second=0
+    if(intDiff > 0){
+        day = Math.floor(intDiff / (60 * 60 * 24));
+        hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+        minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+        second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+    }
+    if (minute <= 9) minute = '0' + minute;
+    if (second <= 9) second = '0' + second;
+    $('#day').html(day);
+    $('#hour').html(hour);
+    $('#min').html(minute);
+    $('#sec').html(second);
+    intDiff--;
+    }, 1000);
+} 
+$(function(){
+    timer(intDiff);
+}); 
+</script>
+ <div class="p_title">产品详情</div>
+ <div class="xinb_a">
+ 	<h4>$!{p.type_name}<span> $!{p.procuct_number}</span></h4>
+ 	<ul>
+ 		<li>总额度：  $number.currency("$!{p.total_amount}")元</li>
+ 		<li>预期年化收益率：  <span>$!{p.year_income}</span></li>
+#set($type_chinese = "月")
+#if($p.cycle_type == "season")
+#set($type_chinese = "季度")
+#end
+#if($p.cycle_type == "year")
+#set($type_chinese = "年")
+#end
+#if($p.cycle_type == "day")
+#set($type_chinese = "日")
+#end
+ 		<li>投资周期：  $!{p.cycle_length}个$!{type_chinese}</li>
+ 		<li>剩余时间：
+ 		<span id="day"></span>天
+ 		<span id="hour"></span>时
+ 		<span id="min"></span>分
+ 		<span id="sec"></span>秒
+ 		</li>
+#set($remain_amount = $p.total_amount - $p.joined_amount)
+ 		<li>剩余可投资额度：  <span>$number.currency("$!{remain_amount}")元</span></li>
+ 		<li>累计加入人数：  <span>$!{p.joined_man}人</span></li>
+ 	</ul>
+ </div>
+ <div class="xin_b_b">
+ 	<dl>
+ 		<dt>投标进度 <span>$!{p.complete_percent}%</span></dt>
+ 		<dd><span style="width:$!{p.complete_percent}%;"></span></dd>
+ 	</dl>
+ </div>
+ <div class="xin_c">
+ 	<ul>
+ 		<li>投标请登录金信网 <span>http://www.jinxin99.cn</span></li>
+		<li>或联系客服 <span>400-890-7777</span></li>
+ 	</ul>
+ </div>
+ <div class="xin_d">
+ 	<h4>详细介绍</h4>
+ 	<dl>
+ 		<dt><img src="images/xin_01.jpg" alt="" />保障及收益获取</dt>
+ 		<dd>● 保障方式： 100%本息担保</dd>
+ 		<dd>● 提前赎回方式： 平台转让</dd>
+ 		<dd>● 利息偿还时间：$!{p.reward_time}</dd>
+#if($p.income_type == 0)
+ 		<dd>● 收益获取方式：收益复投、收益返还</dd>
+#elseif($p.income_type == 1)
+ 		<dd>● 收益获取方式：收益返还</dd>
+#elseif($p.income_type == 2)
+ 		<dd>● 收益获取方式：收益复投</dd>
+#else
+		<dd>● 收益获取方式：</dd>
+#end
+ 	</dl>
+ 	<dl>
+ 		<dt><img src="images/xin_01.jpg" alt="" />计划期限</dt>
+ 		<dd>● 计划开始： $!{p.plan_startline}</dd>
+ 		<dd>● 计划到期：   $!{p.plan_endline}</dd>
+ 		<dd>● 提前赎回锁定期： $!{p.lock_time}</dd>
+ 	</dl>
+ 	<dl>
+ 		<dt><img src="images/xin_01.jpg" alt="" />投资标准及上限</dt>
+ 		<dd>● 100元起</dd>
+ 		<dd>● 总金额必须为100元的整数倍</dd>
+ 		<dd>● 预约投资至少1000元起</dd>
+ 	</dl>
+ 	<dl>
+ 		<dt><img src="images/xin_01.jpg" alt="" />其他费用</dt>
+ 		<dd>● 加入费用：免费</dd>
+ 		<dd>● 到期赎回：免费</dd>
+ 		<dd>● 提前赎回： 投资金额的2.0%</dd>
+ 	</dl>
+ </div>
+</body>
+</html>

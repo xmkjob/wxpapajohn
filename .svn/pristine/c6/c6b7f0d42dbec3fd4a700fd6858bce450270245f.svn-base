@@ -1,0 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("我的账单")
+<body>
+#importMobileShareDiv("金信网","金信网-安全、可靠、透明投融资平台，就在您身边！","http://www.jinxin99.cn")
+ <div class="empty">
+ 	<dl>
+ 		<dt><img src="images/empty.jpg" alt="" /></dt>
+ 		<dd>您还没有收益，快来金信网投资吧</dd>
+ 		<dd><a href="http://www.jinxin99.cn/">http://www.jinxin99.cn/</a></dd>
+ 	</dl>
+ </div>
+</body>
+</html>

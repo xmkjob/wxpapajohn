@@ -1,0 +1,135 @@
+<mapping>
+	<class name="com.jinxin.wx.web.wxmessage.wxUplinkMsg">
+		<map-to xml="xml" />
+		<field name="Location_X" type="double">
+			<bind-xml name="Location_X" node="element" />
+		</field>
+		<field name="Location_Y" type="double">
+			<bind-xml name="Location_Y" node="element" />
+		</field>
+		<field name="Latitude" type="double">
+			<bind-xml name="Latitude" node="element" />
+		</field>
+		<field name="Longitude" type="double">
+			<bind-xml name="Longitude" node="element" />
+		</field>
+		<field name="Precision" type="double">
+			<bind-xml name="Precision" node="element" />
+		</field>
+		<field name="CreateTime" type="integer">
+			<bind-xml name="CreateTime" node="element" />
+		</field>
+		<field name="Scale" type="integer">
+			<bind-xml name="Scale" node="element" />
+		</field>
+		<field name="ToUserName" type="string">
+			<bind-xml name="ToUserName" node="element" />
+		</field>
+		<field name="FromUserName" type="string">
+			<bind-xml name="FromUserName" node="element" />
+		</field>
+		<field name="MsgType" type="string">
+			<bind-xml name="MsgType" node="element" />
+		</field>
+		<field name="MediaId" type="string">
+			<bind-xml name="MediaId" node="element" />
+		</field>
+		<field name="Format" type="string">
+			<bind-xml name="Format" node="element" />
+		</field>
+		<field name="MsgId" type="string">
+			<bind-xml name="MsgId" node="element" />
+		</field>
+		<field name="PicUrl" type="string">
+			<bind-xml name="PicUrl" node="element" />
+		</field>
+		<field name="Content" type="string">
+			<bind-xml name="Content" node="element" />
+		</field>
+		<field name="ThumbMediaId" type="string">
+			<bind-xml name="ThumbMediaId" node="element" />
+		</field>
+		<field name="Label" type="string">
+			<bind-xml name="Label" node="element" />
+		</field>
+		<field name="Title" type="string">
+			<bind-xml name="Title" node="element" />
+		</field>
+		<field name="Description" type="string">
+			<bind-xml name="Description" node="element" />
+		</field>
+		<field name="Event" type="string">
+			<bind-xml name="Event" node="element" />
+		</field>
+		<field name="EventKey" type="string">
+			<bind-xml name="EventKey" node="element" />
+		</field>
+		<field name="Ticket" type="string">
+			<bind-xml name="Ticket" node="element" />
+		</field>
+	</class>
+	<class name="com.jinxin.wx.web.wxmessage.wxMessageTxt">
+		<map-to xml="xml" />
+		<field name="ToUserName" type="string">
+			<bind-xml name="ToUserName" node="element"/>
+		</field>
+		<field name="FromUserName" type="string">
+			<bind-xml name="FromUserName" node="element" />
+		</field>
+		<field name="MsgType" type="string">
+			<bind-xml name="MsgType" node="element" />
+		</field>
+		<field name="CreateTime" type="integer">
+			<bind-xml name="CreateTime" node="element" />
+		</field>
+		<field name="Content" type="string">
+			<bind-xml name="Content" node="element" />
+		</field>
+	</class>
+	<class name="com.jinxin.wx.web.wxmessage.wxMessageArticle">
+		<map-to xml="xml" />
+		<field name="ToUserName" type="string">
+			<bind-xml name="ToUserName" node="element"/>
+		</field>
+		<field name="FromUserName" type="string">
+			<bind-xml name="FromUserName" node="element" />
+		</field>
+		<field name="MsgType" type="string">
+			<bind-xml name="MsgType" node="element" />
+		</field>
+		<field name="CreateTime" type="integer">
+			<bind-xml name="CreateTime" node="element" />
+		</field>
+		<field name="ArticleCount" type="integer">
+			<bind-xml name="ArticleCount" node="element" />
+		</field>
+	    <field name="Articles" type="com.jinxin.wx.web.wxmessage.wxArticles">
+	      <bind-xml name="Articles" node="element" />
+	    </field>
+	</class>
+
+	<class name="com.jinxin.wx.web.wxmessage.wxArticles">
+		<map-to xml="Articles" />
+		<field name="item" type="com.jinxin.wx.web.wxmessage.wxArticleItem"  collection="arraylist">
+			<bind-xml name="item" node="element"/>
+		</field>
+	</class>
+	
+	<class name="com.jinxin.wx.web.wxmessage.wxArticleItem">
+		<map-to xml="item" />
+		<field name="Title" type="string">
+			<bind-xml name="Title" node="element"/>
+		</field>
+		<field name="Description" type="string">
+			<bind-xml name="Description" node="element" />
+		</field>
+		<field name="PicUrl" type="string">
+			<bind-xml name="PicUrl" node="element" />
+		</field>
+		<field name="Url" type="string">
+			<bind-xml name="Url" node="element" />
+		</field>
+	</class>	
+	
+	
+</mapping>

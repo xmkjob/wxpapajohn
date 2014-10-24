@@ -1,0 +1,14 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="com.papa.wx.web.service.impl.JxRestfulServiceTest" tests="1" failures="0" errors="0" timestamp="2014-10-23T06:35:02" hostname="3H9XIB70MLWI789" time="11.956">
+  <properties/>
+  <testcase name="setBonuslist" classname="com.papa.wx.web.service.impl.JxRestfulServiceTest" time="11.956"/>
+  <system-out><![CDATA[Hibernate: 
+    insert 
+    into
+        bonuslist
+        (address, bonusno, creattime, phonenum, username) 
+    values
+        (?, ?, ?, ?, ?)
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

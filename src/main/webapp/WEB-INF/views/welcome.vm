@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #importCss()
+    #importJs()
+<title>登录成功默认页</title>
+</head>
+<body>
+<!--页头start-->
+#importHeaderDiv("","","")
+<!--页头end-->
+<div class="mainBox homeBody">
+  <div class="homeWap clearfix">
+	<!--左侧导航start-->
+	#importSideNavDiv($items, "")
+	<!--左侧导航end-->
+    <div class="rightBody">
+      <div class="default">今天是<span>$!date.format('yyyy年MM月dd日 E',$!currentDate)</span>要开心的工作哟！</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

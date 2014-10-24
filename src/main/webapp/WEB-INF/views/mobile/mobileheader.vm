@@ -1,0 +1,19 @@
+#macro(importMobileHeaderDiv $title)
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="viewport" content="width=device-width, target-densitydpi=low-dpi, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="description" content="" />
+<meta name="jinxinlogo" content="$rc.contextPath/images/jinxin.jpg" />
+<meta http-equiv="Cache-Control" content="no-transform " />
+<title>$!{title}</title>
+<script src="$rc.contextPath/js/jquery-1.7.2.min.js" type="text/javascript"></script>
+<script src="$rc.contextPath/mobile/js/mobile.validate.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="$rc.contextPath/mobile/css/style.css"/>
+</head>
+
+#end

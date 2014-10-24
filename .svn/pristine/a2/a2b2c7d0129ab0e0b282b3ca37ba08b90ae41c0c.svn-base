@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("我的账单")
+<body class="body_f">
+#importMobileShareDiv("金信网","金信网-安全、可靠、透明投融资平台，就在您身边！","http://www.jinxin99.cn")
+<div class="zd_top">
+	<dl>
+		<dt>本月总收益</dt>
+		<dd><img src="images/zd_01.jpg" alt="" /></dd>
+		<dd>截止日期：$!{user.month_income_endline}</dd>
+	</dl>
+</div>
+<div class="zd_b">
+	<ul>
+		<li>$!{user.username}：</li>
+		<li>赚钱啦！</li>
+		<li>金信网累计为你赚了<span>$!{user.total}</span>元！</li>
+		<li>存活期的小伙伴才得了<b>$!{user.ifbank}</b>元，让伦家情何以堪~想要稳稳的幸福？来金信网投资！</li>
+	</ul>
+	<p><span></span></p>
+</div>
+<div class="zd_c">
+	<p><span></span></p>
+	<dl>
+		<dt>账户净资产：</dt>
+		<dd class="zd_dd"><img src="images/zd_02.jpg" alt="" /><b>$!{user.asset}</b>元</dd>
+		<dd><span>投资账户：50,000元 </span><span>账户余额：$!{user.balance}元</span></dd>
+		<dd><span>本月累计收入：$!{user.month_income}元</span><span>计息日期：$!{user.rewardtime}</span></dd>
+	</dl>
+</div>
+<div class="zd_d">
+	<a href="$rc.contextPath/mobile/mybilllist?uid=$!{uid}">查看历史账单</a>
+</div>
+</body>
+</html>

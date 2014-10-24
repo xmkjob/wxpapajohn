@@ -1,0 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("绑定成功")
+<body>
+#importMobileShareDiv("金信网","金信网-安全、可靠、透明投融资平台，就在您身边！","http://www.jinxin99.cn")
+ <div class="band">
+ 	<dl>
+ 		<dt><img src="images/kb_03.jpg" alt="" /></dt>
+ 		<dd>太棒了，恭喜绑定成功！</dd>
+ 		<dd>金小宝随时随地为您提供服务~</dd>
+ 	</dl>
+ </div>
+</body>
+</html>

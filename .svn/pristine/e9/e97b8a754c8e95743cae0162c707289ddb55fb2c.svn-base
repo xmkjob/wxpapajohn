@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+#importMobileHeaderDiv("提现进度")
+<body style="background:#fdefdb;">
+#importMobileShareDiv("金信网","金信网-安全、可靠、透明投融资平台，就在您身边！","http://www.jinxin99.cn")
+<div class="spend_t">
+	<dl>
+#if($item.bankName == "中国工商银行")
+#set($bankIcon = "icbc.png")
+#end
+#if($item.bankName == "中国农业银行")
+#set($bankIcon = "nongye.png")
+#end
+#if($item.bankName == "中国建设银行")
+#set($bankIcon = "ccb.png")
+#end
+#if($item.bankName == "中国银行")
+#set($bankIcon = "boc.png")
+#end
+#if($item.bankName == "招商银行")
+#set($bankIcon = "zhaoshang.png")
+#end
+#if($item.bankName == "广发银行")
+#set($bankIcon = "guangfa.png")
+#end
+#if($item.bankName == "兴业银行")
+#set($bankIcon = "xingye.png")
+#end
+#if($item.bankName == "中国光大银行")
+#set($bankIcon = "guangda.png")
+#end
+		<dt><img src="images/$!bankIcon" alt="" /></dt>
+		
+		#set($strlength = $item.cardNo.toString().length())
+	 	#set($fourlength = $strlength - 4)
+		<dd>$item.bankName   $item.cardNo.toString().substring(0,4)****$item.cardNo.toString().substring($fourlength,$strlength)</dd>
+		<dd>交易编号   $!{item.id}</dd>
+	</dl>
+</div>
+<div class="spend_neber">
+<h4>提现金额</h4>
+<div style="height:40px;">
+$number.currency("$!{item.money}")元
+</div>
+<div style="padding:0 10px; height:40px; color: #72440a; font-size:12px; text-align:right;">
+提现成功后收取$number.currency("$!{item.poundageFee}")元手续费
+</div>
+</div>
+<div class="spend_m">
+
+#if($item.status == 0 || $item.status == 1)
+<p><span></span><span></span></p>
+#elseif($item.status == 2 || $item.status == 3)
+#if($item.withdrawProcessing)
+<p><span></span></p>
+#else
+<p></p>
+#end
+#end
+	<h4>提现进度</h4>
+	<ul>
+#if($item.status == 0)
+	
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.withdrawTime})</div><span class="spend_a"></span>提交申请</li>
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.withdrawProcessing})</div><span class="spend_b"></span>处理中</li>
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.verifyTime})</div><span class="spend_cr"></span>提现失败<br></li>
+
+#end
+
+#if($item.status == 1)
+	
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.withdrawTime})</div><span class="spend_a"></span>提交申请</li>
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.withdrawProcessing})</div><span class="spend_b"></span>处理中</li>
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.verifyTime})</div><span class="spend_cr"></span>提现成功<br></li>
+
+#end
+
+#if($item.status == 2 || $item.status == 3)
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.withdrawTime})</div><span class="spend_a"></span>提交申请</li>
+
+#if($item.withdrawProcessing)
+		<li><div class="li_left"><img src="images/jd_05.png" alt="" />$!date.format('yyyy-MM-dd HH:mm:ss ',$!{item.withdrawProcessing})</div><span class="spend_b"></span>处理中</li>
+#else
+		<li><span class="spend_b"></span>处理中</li>
+#end
+
+		<li><span class="spend_cr"></span>处理完成<br>（申请提交后3个工作日内）</li>
+#end	
+	</ul>
+</div>
+<div class="spend_bt">如有问题请咨询客服热线：<span>400-890-7777</span></div>
+</body>
+</html>

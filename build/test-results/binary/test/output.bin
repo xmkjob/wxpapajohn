@@ -1,0 +1,7 @@
+’Hibernate: 
+    insert 
+    into
+        bonuslist
+        (address, bonusno, creattime, phonenum, username) 
+    values
+        (?, ?, ?, ?, ?)
