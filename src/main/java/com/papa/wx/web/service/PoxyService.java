@@ -22,4 +22,5 @@ public interface PoxyService {
 	public Poxy foundByCustomeridAndPoxyno(long customerid,String poxyno);
 	public List<Poxy> findByGroupidAndSaleidAndCreatetimeGreaterThan(long groupid,long saleid,Date createtime);
 	public List<Poxy> findBySaleidAndCreatetimeGreaterThan(long saleid,Date createtime);
+	public List<Poxy> findByCustomeridAndCreatetimeGreaterThan(long customerid,Date createtime);
 }

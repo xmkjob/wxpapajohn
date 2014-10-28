@@ -95,4 +95,13 @@ public class JpaPoxyService implements PoxyService {
 
 
 
+	@Override
+	public List<Poxy> findByCustomeridAndCreatetimeGreaterThan(long customerid,
+			Date createtime) {
+		// TODO Auto-generated method stub
+		return poxyRepository.findByCustomeridAndCreatetimeGreaterThan(customerid, createtime);
+	}
+
+
+
 }

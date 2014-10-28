@@ -17,5 +17,6 @@ public interface PoxyRepository extends JpaRepository<Poxy, Long> {
 	List<Poxy> findByGroupidAndSaleidAndCreatetimeGreaterThan(long groupid,long saleid,Date createtime);
 	
 	List<Poxy> findBySaleidAndCreatetimeGreaterThan(long saleid,Date createtime);
+	List<Poxy> findByCustomeridAndCreatetimeGreaterThan(long customerid,Date createtime);
 
 }
