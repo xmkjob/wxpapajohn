@@ -6,16 +6,16 @@
 	<import resource="applicationContext-service.xml"/>
     
     <!-- data source -->
-    <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close"
-        p:driverClass="com.mysql.jdbc.Driver" p:jdbcUrl="jdbc:mysql://localhost/papajohn?useUnicode=yes&amp;characterEncoding=UTF-8"
-        p:username="papa" p:password="Aq1sW2de#"
-        p:partitionCount="2" p:acquireIncrement="5"
-        p:minConnectionsPerPartition="10" p:maxConnectionsPerPartition="20"
-        p:idleConnectionTestPeriodInMinutes="1" p:idleMaxAgeInMinutes="5"
-        p:statementsCacheSize="100" />
+     <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close"
+         p:driverClass="com.mysql.jdbc.Driver" p:jdbcUrl="jdbc:mysql://rds6nnrun6nnrun.mysql.rds.aliyuncs.com:3306/sohu?useUnicode=yes&amp;characterEncoding=UTF-8" 
+         p:username="sohu" p:password="sohu1020" 
+         p:partitionCount="2" p:acquireIncrement="5" 
+         p:minConnectionsPerPartition="10" p:maxConnectionsPerPartition="20" 
+         p:idleConnectionTestPeriodInMinutes="1" p:idleMaxAgeInMinutes="5" 
+         p:statementsCacheSize="100"/>
 
 	<!-- shiro configuration -->
-	<bean id="accountRealm" class="com.papa.wx.web.security.AccountRealm"/>
+	 <bean id="accountRealm" class="com.papa.wx.web.security.AccountRealm"/>
 
 	<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager" />
 	
@@ -40,11 +40,12 @@
             /css/images/** = anon
             /images/** = anon
             
+           
             /mobile/** = anon
             /mobile/js/** = anon
             /mobile/css/** = anon
             /mobile/images/** = anon
-            /sendMsg = anon
+           	/sendMsg = anon
 
             /index.jps = anon
             / = anon
@@ -54,7 +55,7 @@
         </property>
     </bean>
 
-    <bean id="authc" class="com.papa.wx.web.security.LoginAuthenticationFilter"/>
+  	<bean id="authc" class="com.papa.wx.web.security.LoginAuthenticationFilter"/>
 
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
 

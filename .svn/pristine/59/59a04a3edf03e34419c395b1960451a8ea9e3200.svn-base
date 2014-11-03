@@ -114,7 +114,7 @@ public class GroupsJsonController {
 			List<Poxy> list = poxyService.findBySaleid(saleId);
 
 			JsonUtil json1 = new JsonUtil();
-			for (int i = 0; i <list.size(); i++) {
+			for (int i = 0; i >= 0; i++) {
 				Poxy poxy = list.get(i);
 				JsonUtil json_a = new JsonUtil();
 				json_a.add("groupid", poxy.getGroupid() + "");

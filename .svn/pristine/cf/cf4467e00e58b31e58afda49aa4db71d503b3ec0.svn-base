@@ -487,12 +487,8 @@ public class MessageJsonController {
 		List<Poxy> poxylist = new ArrayList<Poxy>();
 		while (it.hasNext()) {
 			String poxyno = it.next();
-			List<Poxy> poxyl = poxyService.foundByCustomeridAndPoxyno(customerid,
+			Poxy poxy = poxyService.foundByCustomeridAndPoxyno(customerid,
 					poxyno);
-			Poxy poxy = new Poxy();
-			if(poxyl!=null&&poxyl.size()>0){
-				poxy = poxyl.get(0);
-			}
 			poxylist.add(poxy);
 		}
 

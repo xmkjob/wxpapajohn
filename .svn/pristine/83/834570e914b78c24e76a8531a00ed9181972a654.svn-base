@@ -71,7 +71,7 @@ public class JpaPoxyService implements PoxyService {
 
 
 	@Override
-	public List<Poxy> foundByCustomeridAndPoxyno(long customerid, String poxyno) {
+	public Poxy foundByCustomeridAndPoxyno(long customerid, String poxyno) {
 		// TODO Auto-generated method stub
 		return poxyRepository.findByCustomeridAndPoxyno(customerid, poxyno);
 	}

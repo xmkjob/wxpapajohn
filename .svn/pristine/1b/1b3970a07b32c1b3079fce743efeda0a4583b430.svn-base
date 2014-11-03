@@ -13,7 +13,7 @@ public interface PoxyRepository extends JpaRepository<Poxy, Long> {
 	List<Poxy> findAll();
 	List<Poxy> findByGroupid(long groupid);
 	List<Poxy> findByGroupidAndSaleid(long groupid,long saleid);
-	List<Poxy> findByCustomeridAndPoxyno(long customerid,String poxyno);
+	Poxy findByCustomeridAndPoxyno(long customerid,String poxyno);
 	List<Poxy> findByGroupidAndSaleidAndCreatetimeGreaterThan(long groupid,long saleid,Date createtime);
 	
 	List<Poxy> findBySaleidAndCreatetimeGreaterThan(long saleid,Date createtime);
